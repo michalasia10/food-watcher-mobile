@@ -1,0 +1,17 @@
+{
+  "@@locale": "en",
+  "addMeal": "Add meal",
+  "appTitle": "Diet Maker",
+  "categoriesTitle": "Choose category",
+  "chooseMealTitle": "Choose meal",
+  "chooseProductTitle": "Choose product",
+  "homeTitle": "Home",
+  "login": "Login",
+  "loginTitle": "Log in",
+  "myWeekTitle": "My week",
+  "noMealsPlanned": "No meals planned",
+  "password": "Password",
+  "productDetailsTitle": "Product details",
+  "signInAction": "Sign in",
+  "somethingWentWrong": "Something went wrong"
+}

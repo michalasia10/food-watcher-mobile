@@ -1,0 +1,17 @@
+{
+  "@@locale": "pl",
+  "addMeal": "Dodaj posiłek",
+  "appTitle": "Diet Maker",
+  "categoriesTitle": "Wybierz kategorię",
+  "chooseMealTitle": "Wybierz posiłek",
+  "chooseProductTitle": "Wybierz produkt",
+  "homeTitle": "Ekran główny",
+  "login": "Login",
+  "loginTitle": "Logowanie",
+  "myWeekTitle": "Mój tydzień",
+  "noMealsPlanned": "Brak zaplanowanych posiłków",
+  "password": "Hasło",
+  "productDetailsTitle": "Szczegóły produktu",
+  "signInAction": "Zaloguj",
+  "somethingWentWrong": "Coś poszło nie tak"
+}
