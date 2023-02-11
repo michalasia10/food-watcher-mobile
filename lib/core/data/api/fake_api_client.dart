@@ -5,9 +5,4 @@ extension FakeApiClient on ApiClient {
         Duration(milliseconds: 500),
         () => List<int>.generate(7, (i) => 1634688000000 + i * 86400000),
       );
-
-  Future<bool> login() => Future.delayed(
-        Duration(milliseconds: 1500),
-        () => true,
-      );
 }

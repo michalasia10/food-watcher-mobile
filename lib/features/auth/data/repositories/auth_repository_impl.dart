@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:diet_maker/core/data/api/api_client.dart';
-import 'package:diet_maker/core/data/api/fake_api_client.dart';
 import 'package:diet_maker/core/error/failures.dart';
+import 'package:diet_maker/features/auth//domain/entities/user.dart';
 import 'package:diet_maker/features/auth/domain/repositories/auth_repository.dart';
 
 class AuthRepositoryImpl extends AuthRepository {
@@ -10,9 +10,11 @@ class AuthRepositoryImpl extends AuthRepository {
   final ApiClient _apiClient;
 
   @override
-  Future<Either<Failure, bool>> login() async {
+  Future<Either<Failure, String>> login(
+      String username, String password) async {
     try {
-      final response = await _apiClient.login();
+      User user = User(username: username, password: password);
+      final response = await _apiClient.post('/login', user.toJson());
       return Right(response);
     } catch (e) {
       return Left(ClientFailure(e));

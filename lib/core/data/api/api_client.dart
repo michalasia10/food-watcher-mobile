@@ -19,10 +19,13 @@ class ApiClient {
   }
 
   Future<dynamic> get(String url, {Map<String, dynamic>? params}) {
-    return _wrapApiRequest(
-        _dio.get(url, queryParameters: params),
-        endpoint: url
-    );
+    return _wrapApiRequest(_dio.get(url, queryParameters: params),
+        endpoint: url);
+  }
+
+  Future<dynamic> post(String url, data, {Map<String, dynamic>? params}) {
+    return _wrapApiRequest(_dio.post(url, data: data, queryParameters: params),
+        endpoint: url);
   }
 
   Future<dynamic> _wrapApiRequest<T>(Future<Response<dynamic>> apiCall,
