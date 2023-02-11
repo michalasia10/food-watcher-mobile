@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 
 ThemeData lightTheme = ThemeData(
-  primarySwatch: Colors.green,
-  backgroundColor: Colors.white,
   visualDensity: VisualDensity.adaptivePlatformDensity,
+  colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
+      .copyWith(background: Colors.white),
 );
 
 ThemeData darkTheme = ThemeData(
-  primarySwatch: Colors.blue,
-  backgroundColor: Colors.black,
   visualDensity: VisualDensity.adaptivePlatformDensity,
+  colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+      .copyWith(background: Colors.black),
 );
 
 ThemeData getTheme({required bool isDark}) => ThemeData(
-  primarySwatch: isDark ? Colors.green : Colors.blue,
-  backgroundColor: isDark ? Colors.black : Colors.white,
-  visualDensity: VisualDensity.adaptivePlatformDensity,
-);
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      colorScheme: ColorScheme.fromSwatch(
+              primarySwatch: isDark ? Colors.green : Colors.blue)
+          .copyWith(background: isDark ? Colors.black : Colors.white),
+    );
