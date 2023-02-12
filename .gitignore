@@ -8,3 +8,4 @@ coverage
 .flutter-plugins
 .flutter-plugins-dependencies
 *.freezed.dart
+pubspec.lock
