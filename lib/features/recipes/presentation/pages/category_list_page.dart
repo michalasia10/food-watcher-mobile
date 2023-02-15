@@ -23,6 +23,7 @@ class _CategoryListPageState extends State<CategoryListPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (BuildContext context) {
+          //todo: rename CategoriesBloc -> CategoriesCubit
           return CategoriesBloc.fromContext(context)..loadCategories();
         },
         child: Scaffold(

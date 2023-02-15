@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 
 class ApiClient {
@@ -34,6 +36,8 @@ class ApiClient {
       final Response response = await apiCall;
       return response.data;
     } on DioError catch (e) {
+      print(e.toString());
+    } on SocketException catch (e) {
       print(e.toString());
     }
   }

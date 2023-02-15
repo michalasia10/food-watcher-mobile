@@ -2,6 +2,11 @@ import 'package:diet_maker/core/app/router.dart';
 import 'package:diet_maker/features/auth/presentation/bloc/login_cubit.dart';
 import 'package:diet_maker/l10n/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/error/failures.dart';
+import '../../../common/presentation/components/failure_view.dart';
+import '../../../common/presentation/components/progress_view.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key, required this.title}) : super(key: key);
@@ -17,7 +22,41 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (BuildContext context) {
+        return LoginCubit.fromContext(context);
+      },
+      child: _buildBody(context),
+      // child: _buildScaffold(
+      //     context,
+      //     context
+      //         .read<LoginCubit>()
+      //         .login(_usernameController.text, _passwordController.text)),
+    );
+  }
+
+  Widget _buildBody(
+    BuildContext context,
+  ) {
+    return BlocBuilder<LoginCubit, LoginState>(
+      builder: (BuildContext context, LoginState state) {
+        return state.when(
+          initial: () => _buildScaffold(context),
+          loading: () => const ProgressView(),
+          success: (String token) {
+            Navigator.pushNamed(context, Routes.kHomePage);
+            return SizedBox.shrink();
+          },
+          failed: (Failure failure) => Center(
+            child: FailureView(failure: failure),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildScaffold(BuildContext context) => Scaffold(
         appBar: AppBar(title: Text(widget.title)),
         body: Container(
           color: Theme.of(context).colorScheme.background,
@@ -48,7 +87,10 @@ class _LoginPageState extends State<LoginPage> {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: TextButton(
-                    onPressed: () => login(context),
+                    onPressed: () => context.read<LoginCubit>().login(
+                          _usernameController.text,
+                          _passwordController.text,
+                        ),
                     child: Text(context.l10n.signInAction),
                   ),
                 ),
@@ -57,13 +99,4 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       );
-
-  Future<void> login(BuildContext context) async {
-    final loginCubit = LoginCubit.fromContext(context);
-    final username = _usernameController.text;
-    final password = _passwordController.text;
-    await loginCubit
-        .login(username, password)
-        .whenComplete(() => {Navigator.pushNamed(context, Routes.kHomePage)});
-  }
 }
