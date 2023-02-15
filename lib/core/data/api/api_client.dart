@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../../error/failures.dart';
+
 class ApiClient {
   ApiClient(String apiUrl) : _dio = _createDio(apiUrl);
 
@@ -37,8 +39,10 @@ class ApiClient {
       return response.data;
     } on DioError catch (e) {
       print(e.toString());
+      throw NoInternetConnectionFailure();
     } on SocketException catch (e) {
       print(e.toString());
+      throw NoInternetConnectionFailure();
     }
   }
 }

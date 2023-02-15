@@ -28,11 +28,6 @@ class _LoginPageState extends State<LoginPage> {
         return LoginCubit.fromContext(context);
       },
       child: _buildBody(context),
-      // child: _buildScaffold(
-      //     context,
-      //     context
-      //         .read<LoginCubit>()
-      //         .login(_usernameController.text, _passwordController.text)),
     );
   }
 
@@ -48,15 +43,14 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.pushNamed(context, Routes.kHomePage);
             return SizedBox.shrink();
           },
-          failed: (Failure failure) => Center(
-            child: FailureView(failure: failure),
-          ),
+          failed: (Failure failure) =>
+              _buildScaffold(context, failure: failure),
         );
       },
     );
   }
 
-  Widget _buildScaffold(BuildContext context) => Scaffold(
+  Widget _buildScaffold(BuildContext context, {Failure? failure}) => Scaffold(
         appBar: AppBar(title: Text(widget.title)),
         body: Container(
           color: Theme.of(context).colorScheme.background,
@@ -94,6 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text(context.l10n.signInAction),
                   ),
                 ),
+                if (failure != null) FailureView(failure: failure),
               ],
             ),
           ),
