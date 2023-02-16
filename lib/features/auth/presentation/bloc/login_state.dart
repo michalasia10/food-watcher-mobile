@@ -6,7 +6,8 @@ class LoginState with _$LoginState {
 
   const factory LoginState.loading() = _Loading;
 
-  const factory LoginState.success() = _Success;
-
   const factory LoginState.failed(Failure failure) = _Failed;
+
+  const factory LoginState.success(String token) = _Success;
+
 }

@@ -1,2 +1,11 @@
 /build/
 android/app/build.gradle
+.idea
+.dart_tool
+android
+ios
+coverage
+.flutter-plugins
+.flutter-plugins-dependencies
+*.freezed.dart
+pubspec.lock
